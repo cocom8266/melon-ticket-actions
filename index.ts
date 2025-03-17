@@ -38,8 +38,8 @@ import * as qs from "querystring";
     }),
   });
 
-  // 使用 core.info 替换 console.log
-  core.info("Got response: " + JSON.stringify(res.data));
+  // tslint:disable-next-line
+  console.log("Got response: ", res.data);
 
   if (res.data.chkResult) {
     const link = `http://ticket.melon.com/performance/index.htm?${qs.stringify({
@@ -49,7 +49,6 @@ import * as qs from "querystring";
     await webhook.send(`${message} ${link}`);
   }
 })().catch((e) => {
-  // 使用 core.error 替换 console.error
-  core.error(e.stack);
+  console.error(e.stack); // tslint:disable-line
   core.setFailed(e.message);
 });
