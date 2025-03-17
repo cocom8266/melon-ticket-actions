@@ -13,4 +13,5 @@ jobs:
           product-id: 2110865
           schedule-id: 100001
           seat-id: 29,30,31,32,33,F2,34,35,36,37,38,39,40,41,42,43,F3,44
+         slack-incoming-webhook-url: ${{ https://hooks.slack.com/services/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 }}
           message: '<@U12345678> 달려달려~'
