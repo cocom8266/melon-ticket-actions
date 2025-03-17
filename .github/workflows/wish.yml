@@ -5,7 +5,7 @@ on:
 jobs:
   job:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 1
     steps:
       - name: Check Tickets
         uses: mooyoul/melon-ticket-actions@v1.1.0
