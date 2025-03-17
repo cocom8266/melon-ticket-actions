@@ -1,22 +1,27 @@
 import * as core from "@actions/core";
+import { IncomingWebhook } from "@slack/webhook";
 import axios from "axios";
 import * as qs from "querystring";
 
 (async () => {
   // Validate parameters
-  const [productId, scheduleId, seatId] = [
+  const [ productId, scheduleId, seatId, webhookUrl ] = [
     "product-id",
     "schedule-id",
     "seat-id",
+    "slack-incoming-webhook-url",
   ].map((name) => {
     const value = core.getInput(name);
     if (!value) {
       throw new Error(`melon-ticket-actions: Please set ${name} input parameter`);
     }
+
     return value;
   });
 
   const message = core.getInput("message") ?? "티켓사세요";
+
+  const webhook = new IncomingWebhook(webhookUrl);
 
   const res = await axios({
     method: "POST",
@@ -33,15 +38,18 @@ import * as qs from "querystring";
     }),
   });
 
-  console.log("Got response: ", res.data);
+  // 使用 core.info 替换 console.log
+  core.info("Got response: " + JSON.stringify(res.data));
 
   if (res.data.chkResult) {
     const link = `http://ticket.melon.com/performance/index.htm?${qs.stringify({
       prodId: productId,
     })}`;
-    console.log(`${message} ${link}`);
+
+    await webhook.send(`${message} ${link}`);
   }
 })().catch((e) => {
-  console.error(e.stack);
+  // 使用 core.error 替换 console.error
+  core.error(e.stack);
   core.setFailed(e.message);
 });
