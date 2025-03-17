@@ -10,7 +10,7 @@ jobs:
       - name: Check Tickets
         uses: mooyoul/melon-ticket-actions@v1.1.0
         with:
-          product-id: 211062
+          product-id: 2110865
           schedule-id: 100001
-          seat-id: A,B,C,D,E,J,K
+          seat-id: 29,30,31,32,33,F2,34,35,36,37,38,39,40,41,42,43,F3,44
           message: '<@U12345678> 달려달려~'
