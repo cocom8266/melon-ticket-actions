@@ -14,10 +14,3 @@ jobs:
           schedule-id: 100001
           seat-id: A,B,C,D,E,J,K
           message: '<@U12345678> 달려달려~'
-on:
-      failure:
-        - name: Notify on failure
-          run: echo "Job failed"
-      success:
-        - name: Notify on success
-          run: echo "Job succeeded"
